@@ -27,14 +27,11 @@ public class ServletController extends javax.servlet.http.HttpServlet {
         else if (request.getParameter("Sort") != null) {
             view.printLnMessage(messagesBundle.getString(APPLIANCES_SORTED_BY_POWER_CONSUMPTION), out);
 
-            model.sortByPowerConsumption();
-            for (ElectricalAppliance curAppliance : model.getAppliancesList()) {
-                view.printLnMessage(curAppliance.toString(), out);
-            }
+            view.printAppliancesList(model.sortByPowerConsumption(), out);
         }
         else if (request.getParameter("Find") != null) {
             view.printLnMessage(messagesBundle.getString(APPLIANCE_FOUND_BY_NAME), out);
-            view.printLnMessage(model.findApplianceByName("Philips"), out);
+            view.printAppliance(model.findApplianceByName("Philips"), out);
         }
         out.close();
     }

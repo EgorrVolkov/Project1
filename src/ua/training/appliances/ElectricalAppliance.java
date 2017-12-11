@@ -1,4 +1,4 @@
-package ua.training;
+package ua.training.appliances;
 
 import java.util.Comparator;
 
@@ -19,7 +19,13 @@ public class ElectricalAppliance implements Comparator<ElectricalAppliance>, Com
         return name;
     }
 
-    public int getPower() {
+    public int getCurrentPower() {
+        if (isPluggedIn())
+            return power;
+        else return 0; // TODO create constant?
+    }
+
+    public int getMaxPower() {
         return power;
     }
 
@@ -31,7 +37,7 @@ public class ElectricalAppliance implements Comparator<ElectricalAppliance>, Com
         return pluggedIn;
     }
 
-    void plugIn() {
+    public void plugIn() {
         this.pluggedIn = true;
     }
 
@@ -39,17 +45,7 @@ public class ElectricalAppliance implements Comparator<ElectricalAppliance>, Com
         return (this.name).compareTo(e.name);
     }
 
-    public int compare(ElectricalAppliance e, ElectricalAppliance e1) {
-        return e.power - e1.power;
-    }
-
-    @Override
-    public String toString() {
-        return "ElectricalAppliance{" +
-                "name='" + name + '\'' +
-                ", power=" + power +
-                ", price=" + price +
-                ", pluggedIn=" + pluggedIn +
-                '}';
+    public int compare(ElectricalAppliance lhs, ElectricalAppliance rhs) {
+        return lhs.power - rhs.power;
     }
 }

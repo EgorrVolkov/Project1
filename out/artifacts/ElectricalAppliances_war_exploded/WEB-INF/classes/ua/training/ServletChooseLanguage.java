@@ -10,6 +10,7 @@ import java.io.IOException;
 @WebServlet(name = "ServletChooseLanguage", urlPatterns = {"/ServletChooseLanguage"})
 public class ServletChooseLanguage extends HttpServlet {
 
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("Russian") != null) {
 

@@ -1,11 +1,11 @@
-package ua.training;
+package ua.training.appliances;
 
 public class Iron extends ElectricalAppliance {
 
-    int maxWorkingTemperature;
-    int curTemperature;
+    private int maxWorkingTemperature;
+    private int curTemperature;
 
-    Iron(String name, int power, int price, int maxTemp) {
+    public Iron(String name, int power, int price, int maxTemp) {
         super(name, power, price);
         maxWorkingTemperature = maxTemp;
     }

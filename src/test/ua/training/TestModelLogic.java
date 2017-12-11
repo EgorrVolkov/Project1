@@ -2,9 +2,12 @@ package test.ua.training;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.training.ElectricalAppliance;
 import ua.training.Model;
 import ua.training.UtilityController;
+import ua.training.appliances.ElectricalAppliance;
+import ua.training.appliances.VacuumCleaner;
+
+import java.awt.Color;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,21 +24,23 @@ public class TestModelLogic {
 
     @Test
     public void testCalculateTotalPowerConsumption() {
-        assertEquals(8600, model.calculateTotalPowerConsumption());
+        assertEquals(4800, model.calculateTotalPowerConsumption()); // TODO remove magic constants
     }
 
     @Test
     public void testSortByPowerConsumption() {
         model.sortByPowerConsumption();
-        int[] powerList = {1800, 2000, 2200, 2600};
+        int[] powerList = {1800, 2000, 2200, 2600}; // TODO remove magic constants
         for (int i = 0; i < 4; i++) {
-            assertEquals(powerList[i], model.getAppliancesList().get(i).getPower());
+            assertEquals(powerList[i], model.sortByPowerConsumption().get(i).getMaxPower());
+            // TODO use current or max available power consumption?
         }
     }
 
     @Test
-    public void testFindApplianceByName() {
-        String expected = "ElectricalAppliance{name='Philips', power=2000, price=4000, pluggedIn=false}";
+    public void testFindApplianceByName() { // TODO remove magic constants
+        // TODO remove explicit ElectricalAppliance instantiation
+        ElectricalAppliance expected = new VacuumCleaner("Philips", 2000, 4000, Color.RED);
         assertEquals(expected, model.findApplianceByName("Philips"));
     }
 }

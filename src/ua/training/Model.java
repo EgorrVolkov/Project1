@@ -1,38 +1,38 @@
 package ua.training;
 
+import ua.training.appliances.ElectricalAppliance;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Model {
 
     private List<ElectricalAppliance> appliancesList = new ArrayList<>();
 
-    public List<ElectricalAppliance> getAppliancesList() {
-        return appliancesList;
-    }
-
-    void addToList(ElectricalAppliance appliance) {
+    void addAppliance(ElectricalAppliance appliance) {
         appliancesList.add(appliance);
     }
 
     public int calculateTotalPowerConsumption() {
         int totalPowerConsumption = 0;
         for (ElectricalAppliance curAppliance : appliancesList) {
-            totalPowerConsumption += curAppliance.getPower();
+            totalPowerConsumption += curAppliance.getCurrentPower();
         }
         return totalPowerConsumption;
     }
 
-    public void sortByPowerConsumption() {
+    public List<ElectricalAppliance> sortByPowerConsumption() {
         Collections.sort(appliancesList);
+        return appliancesList;
     }
 
-    public String findApplianceByName(String string) {
+    public ElectricalAppliance findApplianceByName(String string) {
         for (ElectricalAppliance curAppliance: appliancesList) {
             if (curAppliance.getName().contains(string))
-                return curAppliance.toString();
+                return curAppliance;
         }
-        return "No such appliances found.";
+        throw new NoSuchElementException("No such appliances found."); // TODO own exception, print to view
     }
 }
